@@ -1,0 +1,51 @@
+set ab [get_attribute [get_placement_blockages auto_generate_blockage*] bbox]
+foreach i $ab {
+	set c0 [lindex $i 0]
+	set x0 [lindex $c0 0]
+  set y0 [lindex $c0 1]
+	set c1 [lindex $i 1]
+	set x1 [lindex $c1 0]
+  set y1 [lindex $c1 1] 
+	set h [ expr "$x1 - $x0" ]
+	set v [ expr "$y1 - $y0" ]
+	set area [expr " h*v "]
+	If {[expr "$h >=$v" ] && [ expr "$v >= 2.52" ] ] && [expr "$area > 85"]} {
+		set m [expr "int( $y1 / 1.26)"]
+		set n [expr "$m*1.26 + 0.065"]
+		if [expr "$n > $y1"] { 
+		   	set m [expr "$m - 1"]
+			  set y1_a [expr "$m*1.26 + 0.065"] 
+		  	  if [expr "$y1_a > $y1"] { 
+				  set m [expr "$m - 1"] 
+				  set y1_a [expr "$m*1.26 + 0.065"]
+				  }
+			#puts "bbox_a {{$x0 $y1_a} {$x1 $y1}}"
+			create_routing_blockage -bbox {{$x0 $y1_a} {$x1 $y1}} -layer ME2 -net_type {power ground}
+			create_placement_blockage -bbox {{$x0 $y1_a} {$x1 $y1}} -type hard
+			} else { set y1_a [expr "$m*1.26 + 0.065"]		
+				create_routing_blockage -bbox {{$x0 $y1_a} {$x1 $y1}} -layer ME2 -net_type {power ground}
+				create_placement_blockage -bbox {{$x0 $y1_a} {$x1 $y1}} -type hard
+			  	}
+		set p [expr "int( $y0 / 1.26)"]
+		set q [expr "$p*1.26 - 0.065"] 
+		if [expr "$q < $y0"] {
+			set p [expr "$p + 1"]
+			set y1_b [expr "$p*1.26 - 0.065"]
+		  	if [expr "$y1_b < $y0"] { 
+				set p [expr "$p + 1"] 
+				set y1_b [expr "$p*1.26 - 0.065"]
+				}
+			#puts "bbox_b {{$x0 $y0} {$x1 $y1_b}}"
+			create_routing_blockage -bbox {{$x0 $y0} {$x1 $y1_b}} -layer ME2 -net_type {power ground}
+			create_placement_blockage -bbox {{$x0 $y0} {$x1 $y1_b}}  -type hard
+			} else { set y1_b [expr "$q*1.26 -0.065"]
+				create_routing_blockage -bbox {{$x0 $y0}{$x1 $y1_b}} -layer ME2 -net_type {power ground}
+				create_placement_blockage -bbox {{$x0 $y0} {$x1 $y1_b}}  -type hard
+				}
+		#puts "bbox_c {{$x0 $y1_b} {$x1 $y1_a}}"
+		create_placement_blockage -bbox {{$x0 $y1_b} {$x1 $y1_a}} -type  allow_buffer_only -blocked_percentage 30
+	} else {
+		create_routing_blockage -bbox $i -layer ME2 -net_type {power ground}
+		create_placement_blockage -bbox $i  -type hard
+		}
+}
