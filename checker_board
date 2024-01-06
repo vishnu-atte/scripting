@@ -1,0 +1,30 @@
+set i {{0 0} {5 5}}
+puts $i
+set co1 [lindex $i 0]; set co2 [lindex $i 1]
+set x1 [lindex $co1 0]; set y1 [lindex $co1 1]
+set x2 [lindex $co2 0]; set y2 [lindex $co2 1]
+set n 4
+#set c 1
+puts "x1 is $x1"
+puts "x2 is $x2"
+for {set c1 0} {$c1 < $n} {incr c1} {
+  for {set c2 0} {$c2 < $n} {incr c2} {
+    set p [expr "double($n - $c2)"]
+    set p1 [expr "double($p/$n)"]
+    #puts $p
+    set x1 [expr "double($x2 - $p1*$x2)"]
+    set e [expr "$c2+1"]
+    set f [expr "double($x2 * $e)"]  
+    #puts $f
+    set x4 [expr "double($f/$n)"]
+    #
+    set q [expr "double($n -$c1)"]
+    set q1 [expr "double($q/$n)"]
+    set y1 [expr "double($y2 - $q1*$y2)"]
+    set g [expr "$c1+1"]
+    set h [expr "double($y2 * $g)"]
+    #puts $f
+    set y4 [expr "double($h / $n)"]
+    puts "boundary of $c1$c2 is{$x1  $y1} {$x4 $y4}"
+  }
+}
