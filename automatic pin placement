@@ -1,0 +1,32 @@
+set ab {{0 0}{ 500 500}}}
+set co1 [lindex $ab 0]; set co2 [lindex $ab 1]
+set a1 [lindex $co1 0]; set b1 [lindex $co1 1]
+set a2 [lindex $co2 0]; set b2 [lindex $co2 1]
+set hs 2 # horizontal_spacing
+set vs 2 #vertical_spacing
+set s 10 #space btw core and die
+set xh1 0
+set xh2 0
+set yv1 0
+set yv2 0
+# 2 is spacing between pins and boundary in both x and y direction and 10 be the offset
+#{0 0} {500 500} be the boundary of design
+set ab [get_attribute [get_pins *] -bbox]
+foreach $ab {
+set co1 [lindex $ab 0]; set co2 [lindex $ab 1]
+set x1 [lindex $co1 0]; set y1 [lindex $co1 1]
+set x2 [lindex $co2 0]; set y2 [lindex $co2 1]
+if {[expr "$x1 < $vs"] && [expr "$x2 < $s"]}   {
+    if [expr "$x2 > $xh1"] { set xh1 $x2  }
+}
+if {[expr "$y1 < $hs"] && [expr "$y2 < $s"]}   {
+    if [expr "$y2 > $yv1"] { set yv1 $y2  }
+}
+if {[expr "$x1 < $a2 - $s"] && [expr "$x2 < $a2"]}   {
+    if [expr "$x2 > $xh2"] { set xh2 $x2  }
+}
+if {[expr "$y1 < $b2 - $s"] && [expr "$y2 < $b2"]}   {
+    if [expr "$y2 > $yv2"] { set yv2 $y2 }
+}
+}
+puts "$xh1 $xh2 $yv1 $yv2 "
