@@ -1,0 +1,125 @@
+#block boundaries
+set b {{0.0 0.0} {100.0 100.0}}
+set co1 [lindex $b 0]; set co2 [lindex $b 1]
+set x1 [lindex $co1 0]; set y1 [lindex $co1 1]
+set x2 [lindex $co2 0]; set y2 [lindex $co2 1]
+#macro1 boundaries for height and width
+set i {{0.0 0.0} {15.0 20.0}}
+set ic1 [lindex $i 0]; set ic2 [lindex $i 1]
+set q1 [lindex $ic1 0]; set r1 [lindex $ic1 1]
+set q2 [lindex $ic2 0]; set r2 [lindex $ic2 1]
+set m1w [expr "$q2 - $q1"]
+set m1h [expr "$r2 - $r1"]
+#macro2 boundaries for hieght and width
+set hs 2.0
+set vs 3.0
+#for looping and corner selecting
+#for {set mc1 0} {$mc1 < 5.0} {incr mc1} {
+#for top_left_corner
+puts "top left corner"
+set mc1 0
+for {set c2 0} {$c2 < 5.0} {incr c2} {
+if [expr "$mc1 >= 5.0"] { break }
+for {set c1 0} {$c1 < 5.0} {incr c1} {
+if [expr "$mc1 >= 5.0"] { break }
+set nc1 [expr $c1 + 1]
+set nc2 [expr $c2 + 1]
+set x3 [expr "$hs*$nc1 + $m1w*$c1"]
+if [expr "$x3 < $x1"] { break }
+set y3 [expr "$y2 - $vs*$nc2 - $m1h*$nc2"]
+if [expr "$y3 < $y1"] { break }
+set x4 [expr "$hs*$nc1 + $m1w*$nc1"]
+if [expr "$x4 > $x2 - $hs - $vs"] { break }
+set y4 [expr "$y2 - $vs*$nc2 - $m1h*$c2"]
+if [expr "$y4 > $y2 - $hs - $vs"] { break }
+set nc [expr $c1 + $c2]
+puts "boundary of $mc1 is {$x3 $y3} {$x4 $y4}"
+incr mc1
+}
+}
+#form bottom_left_corner
+puts "bottom left corner"
+set j {{0.0 0.0} {20.0 20.0}}
+set jc1 [lindex $j 0]; set jc2 [lindex $j 1]
+set q1 [lindex $jc1 0]; set r1 [lindex $jc1 1]
+set q2 [lindex $jc2 0]; set r2 [lindex $jc2 1]
+set m2w [expr "$q2 - $q1"]
+set m2h [expr "$r2 - $r1"]
+set mc2 0
+for {set c2 0} {$c2 < 5.0} {incr c2} {
+if [expr "$mc2 >= 5.0"] { break }
+for {set c1 0} {$c1 < 5.0} {incr c1} {
+if [expr "$mc2 >= 5.0"] { break }
+set nc1 [expr $c1 + 1]
+set nc2 [expr $c2 + 1]
+set x3 [expr "$hs*$nc1 + $m2w*$c1"]
+if [expr "$x3 < $x1"] { break }
+set y3 [expr "$vs*$nc2 + $m2h*$nc2"]
+if [expr "$y3 < $y1"] { break }
+set x4 [expr "$hs*$nc1 + $m2w*$nc1"]
+if [expr "$x4 > $x2 - $hs - $vs"] { break }
+set y4 [expr "$vs*$nc2 + $m2h*$c2"]
+if [expr "$y4 > $y2 - $hs - $vs"] { break }
+set nc [expr $c1 + $c2]
+puts "boundary of $mc2 is {$x3 $y3} {$x4 $y4}"
+incr mc2
+}
+}
+#from topright corner
+puts "topright corner"
+set i {{0.0 0.0} {30.0 20.0}}
+set ic1 [lindex $i 0]; set ic2 [lindex $i 1]
+set q1 [lindex $ic1 0]; set r1 [lindex $ic1 1]
+set q2 [lindex $ic2 0]; set r2 [lindex $ic2 1]
+set m3w [expr "$q2 - $q1"]
+set m3h [expr "$r2 - $r1"]
+#
+set mc3 0
+for {set c2 0} {$c2 < 5.0} {incr c2} {
+if [expr "$mc3 >= 5.0"] { break }
+for {set c1 0} {$c1 < 5.0} {incr c1} {
+if [expr "$mc3 >= 5.0"] { break }
+set nc1 [expr $c1 + 1]
+set nc2 [expr $c2 + 1]
+set x3 [expr "$x2 - $hs*$nc1 - $m3w*$nc1"]
+if [expr "$x3 < $x1"] { break }
+set y3 [expr "$y2 - $vs*$nc2 - $m3h*$nc2"]
+if [expr "$y3 < $y1"] { break }
+set x4 [expr "$x2 - $hs*$nc1 - $m3w*$c1"]
+if [expr "$x4 > $x2 - $hs"] { break }
+set y4 [expr "$y2 - $vs*$nc2 - $m3h*$c2"]
+if [expr "$y4 > $y2 - $vs"] { break }
+set nc [expr $c1 + $c2]
+puts "boundary of $mc3 is {$x3 $y3} {$x4 $y4}"
+incr mc3
+}
+}
+
+#from bottom right corner
+puts "bottom right corner"
+set j {{0.0 0.0} {20.0 20.0}}
+set jc1 [lindex $j 0]; set jc2 [lindex $j 1]
+set q1 [lindex $jc1 0]; set r1 [lindex $jc1 1]
+set q2 [lindex $jc2 0]; set r2 [lindex $jc2 1]
+set m4w [expr "$q2 - $q1"]
+set m4h [expr "$r2 - $r1"]
+set mc4 0
+for {set c2 0} {$c2 < 5.0} {incr c2} {
+if [expr "$mc4 >= 5.0"] { break }
+for {set c1 0} {$c1 < 5.0} {incr c1} {
+if [expr "$mc4 >= 5.0"] { break }
+set nc1 [expr $c1 + 1]
+set nc2 [expr $c2 + 1]
+set x3 [expr "$x2 - $hs*$nc1 - $m4w*$nc1"]
+if [expr "$x3 < $x1"] { break }
+set y3 [expr "$vs*$nc2 + $m4h*$nc2"]
+if [expr "$y3 < $y1"] { break }
+set x4 [expr "$x2 - $hs*$nc1 - $m4w*$c1"]
+if [expr "$x4 > $x2"] { break }
+set y4 [expr "$vs*$nc2 + $m4h*$c2"]
+if [expr "$y4 > $y2"] { break }
+set nc [expr $c1 + $c2]
+puts "boundary of $mc4 is {$x3 $y3} {$x4 $y4}"
+incr mc4
+}
+}
