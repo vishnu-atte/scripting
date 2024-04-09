@@ -1,0 +1,30 @@
+set corners [open minr2r.txt]
+set one_corner [split [read $corners] "\n"]
+close $corners
+set outfile [open "endp_final_min.txt" w]
+set c 0
+foreach i $one_corner {
+#puts $outfile "$i \t $i \t $i"
+#gunzip $i/reports/dtsgen2.$i.report_global_timing.min.rpt.gz
+set data [open $i]
+#set data [open a_func.pfff_0p935_min.PF_125.pcff/reports/dtsgen2.a_func.pfff_0p935_min.PF_125.pcff.report_global_timing.min.rpt.gz]
+set lines [split [read $data] "\n"]
+close $data
+foreach j $lines {
+if [regexp "Startpoint" $j] {
+#puts $outfile "$i"
+set c 1
+}
+if [expr "$c > 0"] {
+incr c
+if [expr "$c > 2"] {
+#set j1 [expr $j]
+#if [expr "$j1 > 0"] {
+puts $outfile "$j"
+#:wq}
+}
+}
+}
+set c 0
+}
+close $outfile
