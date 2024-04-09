@@ -1,0 +1,25 @@
+set corners [open max_corners.txt]
+set one_corner [split [read $corners] "\n"]
+close $corners
+set outfile [open "setup.txt" w]
+set c 0; set a 0; set a1 0; set a2 0; set a3 0; set a4 0;
+foreach i $one_corner {
+set k $i
+set data [open $i]
+set lines [split [read $data] "\n"]
+close $data
+foreach j $lines {
+if [regexp "Setup violations" $j] { set c 1 }
+if [expr $c == 1] {
+if [regexp "WNS" $j] { set a2 [lindex $j 2]}
+if [regexp "TNS" $j] { set a3 [lindex $j 2]}
+if [regexp "NUM" $j] { set a4 [lindex $j 2]}
+}
+}
+#if [expr $c == 0] { puts $outfile "$a1 $a2 $a3 $a4" }
+set k1 [string map {dtsgen2. \ } "$k"]
+set k2 [string map {.report_global_timing.max.rpt \ } "$k1"]
+puts $outfile "$k2 $a2 $a3 $a4"
+set c 0; set a 0; set a1 0; set a2 0; set a3 0; set a4 0;
+}
+close $outfile 
