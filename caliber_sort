@@ -1,0 +1,77 @@
+set corners [open required_corners.txt]
+set one_corner [split [read $corners] "\n"]
+close $corners
+set outfile [open "n2_merged_report.txt" w]
+puts $outfile "corners total_number_of_violation \t 58rule set names"
+set lines [split [read $data] "\n"]
+close $data
+set tn 0;
+set a1 0; set a2 0; set a3 0; set a4 0; set a5 0; set a6 0; set a7 0; set a8 0; set a9 0; set a10 0; set a11 0; set a12 0; set a13 0; set a14 0; set a15 0; set a16 0; set a17 0; set a18 0; set a19 0; set a20 0; set a21 0; set a22 0; set a23 0; set a24 0 ; set a25 0; set a26 0; set a27 0; set a28 0; set a29 0; set a30 0; set a31 0; set a32 0; set a33 0; set a34 0; set a35 0 ; set a36 0; set a37 0; set a38 0; set a39 0; set a40 0; set a41 0; set a42 0; set a43 0; set a44 0; set a45 0; set a46 0; set a47 0; set a48 0; set a49 0; set a50 0; set a51 0; set a52 0; set a53 0; set a54 0; set a55 0; set a56 0; set a57 0; set a58 0;
+foreach j $lines {
+
+if [regexp "" $j] { set a1 [lindex $j 3] }
+if [regexp "" $j] { set a2 [lindex $j 3] }
+if [regexp "" $j] { set a3 [lindex $j 3] }
+if [regexp "" $j] { set a4 [lindex $j 3] }
+if [regexp "" $j] { set a5 [lindex $j 3] }
+if [regexp "" $j] { set a6 [lindex $j 3] }
+if [regexp "" $j] { set a7 [lindex $j 3] }
+if [regexp "" $j] { set a8 [lindex $j 3] }
+if [regexp "" $j] { set a9 [lindex $j 3] }
+if [regexp "" $j] { set a10 [lindex $j 3] }
+if [regexp "" $j] { set a11 [lindex $j 3] }
+if [regexp "" $j] { set a12 [lindex $j 3] }
+if [regexp "" $j] { set a13 [lindex $j 3] }
+if [regexp "" $j] { set a14 [lindex $j 3] }
+if [regexp "" $j] { set a15 [lindex $j 3] }
+if [regexp "" $j] { set a16 [lindex $j 3] }
+if [regexp "" $j] { set a17 [lindex $j 3] }
+if [regexp "" $j] { set a18 [lindex $j 3] }
+if [regexp "" $j] { set a19 [lindex $j 3] }
+if [regexp "" $j] { set a20 [lindex $j 3] }
+if [regexp "" $j] { set a21 [lindex $j 3] }
+if [regexp " " $j] { set a22 [lindex $j 3] }
+if [regexp "" $j] { set a23 [lindex $j 3] }
+if [regexp "" $j] { set a24 [lindex $j 3] }
+if [regexp "" $j] { set a25 [lindex $j 3] }
+if [regexp "" $j] { set a26 [lindex $j 3] }
+if [regexp "" $j] { set a27 [lindex $j 3] }
+if [regexp "" $j] { set a28 [lindex $j 3] }
+if [regexp "" $j] { set a29 [lindex $j 3] }
+if [regexp "" $j] { set a30 [lindex $j 3] }
+if [regexp "" $j] { set a31 [lindex $j 3] }
+if [regexp "" $j] { set a32 [lindex $j 3] }
+if [regexp "" $j] { set a33 [lindex $j 3] }
+if [regexp "" $j] { set a34 [lindex $j 3] }
+if [regexp "" $j] { set a35 [lindex $j 3] }
+if [regexp "" $j] { set a36 [lindex $j 3] }
+if [regexp "" $j] { set a37 [lindex $j 3] }
+if [regexp "" $j] { set a38 [lindex $j 3] }
+if [regexp "" $j] { set a39 [lindex $j 3] }
+if [regexp "" $j] { set a40 [lindex $j 3] }
+if [regexp "" $j] { set a41 [lindex $j 3] }
+if [regexp "" $j] { set a42 [lindex $j 3] }
+if [regexp "" $j] { set a43 [lindex $j 3] }
+if [regexp "" $j] { set a44 [lindex $j 3] }
+if [regexp "" $j] { set a45 [lindex $j 3] }
+if [regexp "" $j] { set a46 [lindex $j 3] }
+if [regexp "" $j] { set a47 [lindex $j 3] }
+if [regexp "" $j] { set a48 [lindex $j 3] }
+if [regexp "" $j] { set a49 [lindex $j 3] }
+if [regexp "" $j] { set a50 [lindex $j 3] }
+if [regexp "" $j] { set a51 [lindex $j 3] }
+if [regexp "" $j] { set a52 [lindex $j 3] }
+if [regexp "" $j] { set a53 [lindex $j 3] }
+if [regexp "" $j] { set a54 [lindex $j 3] }
+if [regexp "" $j] { set a55 [lindex $j 3] }
+if [regexp "" $j] { set a56 [lindex $j 3] }
+if [regexp "" $j] { set a57 [lindex $j 3] }
+if [regexp "" $j] { set a58 [lindex $j 3] }
+#if [regexp "" $j] { set lv [lindex $j 3] }
+#if [regexp "MaxCapCharacterization" $j] { set mc [lindex $j 3] }
+if [regexp "Total number of violations  " $j] { set tn [lindex $j 5] }
+}
+puts $outfile "$i $tn $a1 $a2 $a3 $a4 $a5 $a6 $a7 $a8 $a9 $a10 $a11 $a12 $a13 $a14 $a15 $a16 $a17 $a18 $a19 $a20 $a21 $a22 $a23 $a24 $a25 $a26 $a27 $a28 $a29 $a30 $a31 $a32 $a33 $a34 $a35 $a36 $a37 $a38 $a39 $a40 $a41 $a42 $a43 $a44 $a45 $a46 $a47 $a48 $a49 $a50 $a51 $a52 $a53 $a54 $a55 $a56 $a57 $a58"
+set a1 0; set a2 0; set a3 0; set a4 0; set a5 0; set a6 0; set a7 0; set a8 0; set a9 0; set a10 0; set a11 0; set a12 0; set a13 0; set a14 0; set a15 0; set a16 0; set a17 0; set a18 0; set a19 0; set a20 0; set a21 0; set a22 0; set a23 0; set a24 0 ; set a25 0; set a26 0; set a27 0; set a28 0; set a29 0; set a30 0; set a31 0; set a32 0; set a33 0; set a34 0; set a35 0; set a36 0; set a37 0; set a38 0; set a39 0; set a40 0; set a41 0; set a42 0; set a43 0; set a44 0; set a45 0; set a46 0; set a47 0; set a48 0; set a49 0; set a50 0; set a51 0; set a52 0; set a53 0; set a54 0; set a55 0; set a56 0; set a57 0; set a58 0;
+}
+close $outfile
